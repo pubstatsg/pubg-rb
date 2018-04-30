@@ -16,13 +16,8 @@ module PUBG
     def players(shard=@shard, items)
       params = "?filter[playerNames]=#{items}"
       path = "/shards/#{shard}/players#{params}"
-      players = Array.new
 
-      data = request(path)
-      data["data"].each do |player|
-        players << PUBG::Player.new(player)
-      end
-      return players
+      PUBG::Players.new(request(path))
     end
 
     def status
