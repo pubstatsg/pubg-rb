@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "pubg/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "pubg"
-  spec.version       = Pubg::VERSION
+  spec.name          = "pubg-rb"
+  spec.version       = PUBG::VERSION
   spec.authors       = ["Dainel Vera"]
   spec.email         = ["arubinofaux@gmail.com"]
 
@@ -33,4 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+
+  spec.add_dependency "typhoeus", "~> 1.3.0"
+  spec.add_dependency "oj", "~> 3.5.1"
 end
