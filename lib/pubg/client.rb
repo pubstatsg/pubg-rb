@@ -5,11 +5,24 @@ module PUBG
   class Client
   	def initialize(api_key=nil)
       @api_key = api_key[:api_key] || ENV["PUBG_API_KEY"]
+      @shard = ENV["PUBG_SHARD"] || nil
     end
 
-    def player(shard, player_id)
+    def player(shard=@shard, player_id)
       path = "/shards/#{shard}/players/#{player_id}"
       PUBG::Player.new(request(path))
+    end
+
+    def players(shard=@shard, items)
+      params = "?filter[playerNames]=#{items}"
+      path = "/shards/#{shard}/players#{params}"
+      players = Array.new
+
+      data = request(path)
+      data["data"].each do |player|
+        players << PUBG::Player.new(player)
+      end
+      return players
     end
 
     def status
@@ -20,7 +33,6 @@ module PUBG
   	def request(path)
   		request = Typhoeus.get(
 			  [$base_url, path].join(""),
-			  # params: { field1: "a field" },
 			  headers: { 
           Accept: "application/vnd.api+json",
           Authorization: "Bearer #{@api_key}" 

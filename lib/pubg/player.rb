@@ -4,17 +4,21 @@ module PUBG
 								:link, :matches
 
 		def initialize(args)
-			@type = args["data"]["type"]
-			@id = args["data"]["id"]
-			@createdAt = args["data"]["attributes"]["createdAt"]
-			@updatedAt = args["data"]["attributes"]["updatedAt"]
-			@patchVersion = args["data"]["attributes"]["patchVersion"]
-			@name = args["data"]["attributes"]["name"]
-			@stats = args["data"]["attributes"]["stats"]
-			@titleId = args["data"]["attributes"]["titleId"]
-			@shardId = args["data"]["attributes"]["shardId"]
-			@link = args["data"]["links"]["self"]
-			@matches = args["data"]["relationships"]["matches"]["data"]
+			if args["data"]
+				args = args["data"]
+			end
+			
+			@type = args["type"]
+			@id = args["id"]
+			@createdAt = args["attributes"]["createdAt"]
+			@updatedAt = args["attributes"]["updatedAt"]
+			@patchVersion = args["attributes"]["patchVersion"]
+			@name = args["attributes"]["name"]
+			@stats = args["attributes"]["stats"]
+			@titleId = args["attributes"]["titleId"]
+			@shardId = args["attributes"]["shardId"]
+			@link = args["links"]["self"]
+			@matches = args["relationships"]["matches"]["data"]
 		end
 	end
 end
