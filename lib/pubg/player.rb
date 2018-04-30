@@ -1,7 +1,9 @@
 module PUBG
 	class Player
-		attr_reader :type, :id, :createdAt, :updatedAt, :patchVersion, :name, :stats, :titleId, :shardId,
-								:link, :matches
+		require "pubg/player/attributes"
+		require "pubg/player/relationships"
+
+		attr_reader :type, :id, :attributes, :relationships, :link
 
 		def initialize(args)
 			if args["data"]
@@ -10,15 +12,9 @@ module PUBG
 			
 			@type = args["type"]
 			@id = args["id"]
-			@createdAt = args["attributes"]["createdAt"]
-			@updatedAt = args["attributes"]["updatedAt"]
-			@patchVersion = args["attributes"]["patchVersion"]
-			@name = args["attributes"]["name"]
-			@stats = args["attributes"]["stats"]
-			@titleId = args["attributes"]["titleId"]
-			@shardId = args["attributes"]["shardId"]
+			@attributes = Attributes.new(args["attributes"])
+			@relationships = Relationships.new(args["relationships"])
 			@link = args["links"]["self"]
-			@matches = args["relationships"]["matches"]["data"]
 		end
 	end
 end
