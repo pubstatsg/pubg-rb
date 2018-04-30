@@ -1,10 +1,13 @@
 module PUBG
 	class Status
-		attr_reader :version, :releasedAt
+		require "pubg/status/attributes"
+
+		attr_reader :type, :id, :attributes
 
 		def initialize(args)
-			@version = args["data"]["attributes"]["version"]
-			@releasedAt = args["data"]["attributes"]["releasedAt"]
+			@type = args["data"]["type"]
+			@id = args["data"]["id"]
+			@attributes = Attributes.new(args["data"]["attributes"])
 		end
 	end
 end
