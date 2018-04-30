@@ -1,7 +1,7 @@
 module PUBG
 	class Player
 		attr_reader :type, :id, :createdAt, :updatedAt, :patchVersion, :name, :stats, :titleId, :shardId,
-								:link
+								:link, :matches
 
 		def initialize(args)
 			@type = args["data"]["type"]
@@ -14,6 +14,7 @@ module PUBG
 			@titleId = args["data"]["attributes"]["titleId"]
 			@shardId = args["data"]["attributes"]["shardId"]
 			@link = args["data"]["links"]["self"]
+			@matches = args["data"]["relationships"]["matches"]["data"]
 		end
 	end
 end
