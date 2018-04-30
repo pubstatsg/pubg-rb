@@ -5,7 +5,7 @@ module PUBG
   class Client
   	def initialize(api_key=nil)
       @api_key = api_key[:api_key] || ENV["PUBG_API_KEY"]
-      @shard = ENV["PUBG_SHARD"] || nil
+      @shard = ENV["PUBG_SHARD"] || "xbox-na"
     end
 
     def player(shard=@shard, player_id)
@@ -16,8 +16,18 @@ module PUBG
     def players(shard=@shard, items)
       params = "?filter[playerNames]=#{items}"
       path = "/shards/#{shard}/players#{params}"
+      players = Array.new
 
-      PUBG::Players.new(request(path))
+      data = request(path)
+      data["data"].each do |player|
+        players << PUBG::Player.new(player)
+      end
+      return players
+    end
+
+    def match(shard=@shard, match_id)
+      path = "/shards/#{shard}/matches/#{match_id}"
+      PUBG::Match.new(request(path))
     end
 
     def status
