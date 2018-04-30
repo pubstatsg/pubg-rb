@@ -50,6 +50,8 @@ module PUBG
       when 200
       when 404
         raise PUBError.new(response["errors"][0]["title"])
+      when 429
+        raise PUBError.new("RateLimit-Limit reached")
       end
       
       return response
