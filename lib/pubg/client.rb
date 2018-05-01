@@ -32,6 +32,11 @@ module PUBG
       PUBG::Telemetry.new(telemetry_request(url))
     end
 
+    def seasons(shard=@shard)
+      path = "/shards/#{shard}/seasons"
+      PUBG::Seasons.new(request(path))
+    end
+
     def status
       path = "/status"
       PUBG::Status.new(request(path))
