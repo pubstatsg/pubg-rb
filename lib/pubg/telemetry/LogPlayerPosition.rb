@@ -1,7 +1,7 @@
 module PUBG
   class Telemetry
     class LogPlayerPosition
-      require "pubg/telemetry/events/shared/character"
+      require "pubg/telemetry/shared/character"
       
       attr_reader :character, :elapsedtime, :numaliveplayers, :_V, :_D, :_T
 

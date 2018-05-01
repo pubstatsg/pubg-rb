@@ -1,54 +1,34 @@
 module PUBG
   class Telemetry
-    require "pubg/telemetry/LogPlayerLogin"
-    require "pubg/telemetry/LogPlayerCreate"
-    require "pubg/telemetry/LogPlayerPosition"
-    require "pubg/telemetry/LogPlayerAttack"
+    require "pubg/telemetry/logplayerlogin"
+    require "pubg/telemetry/logplayercreate"
+    require "pubg/telemetry/logplayerposition"
+    require "pubg/telemetry/logplayerattack"
 
-    attr_reader :events
+    attr_reader :data, :playerlogin, :playercreate, :playerposition, :playerattack
 
     def initialize(args)
-      @args = args
-      @events = Array.new
-      @LogPlayerLogin = nil
-      @LogPlayerCreate = nil
-      @LogPlayerPosition = nil
-      @LogPlayerAttack = nil
+      @data = args
 
-      @LogItemPickup = nil
-      @LogItemEquip = nil
-      @LogItemUnequip = nil
-      @LogVehicleRide = nil
-      @LogMatchDefinition = nil
-      @LogMatchStart = nil
-      @LogGameStatePeriodic = nil
-      @LogVehicleLeave = nil
-      @LogPlayerTakeDamage = nil
-      @LogPlayerLogout = nil
-      @LogItemAttach = nil
-      @LogItemDrop = nil
-      @LogPlayerKill = nil
-      @LogItemDetach = nil
-      @LogItemUse = nil
-      @LogCarePackageSpawn = nil
-      @LogVehicleDestroy = nil
-      @LogCarePackageLand = nil
-      @LogMatchEnd = nil
+      @playerlogin = []
+      @playercreate = []
+      @playerposition = []
+      @playerattack = []
 
       process_telemetry
     end
 
     def process_telemetry
-      @args.each do |event|
+      @data.each do |event|
         case event["_T"]
         when "LogPlayerLogin"
-          @events << LogPlayerLogin.new(event)
+          @playerlogin << LogPlayerLogin.new(event)
         when "LogPlayerCreate"
-          @events << LogPlayerCreate.new(event)
+          @playercreate << LogPlayerCreate.new(event)
         when "LogPlayerPosition"
-          @events << LogPlayerPosition.new(event)
+          @playerposition << LogPlayerPosition.new(event)
         when "LogPlayerAttack"
-          @events << LogPlayerAttack.new(event)
+          @playerattack << LogPlayerAttack.new(event)
         end
       end
     end
