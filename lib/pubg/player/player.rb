@@ -1,6 +1,6 @@
 module PUBG
 	class Player
-		class Attributes
+		class Player
 			attr_reader :name, :stats, :titleId, :shardId, :createdAt, :updatedAt, :patchVersion
 
 			def initialize(args)
