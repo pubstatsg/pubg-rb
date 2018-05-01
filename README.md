@@ -24,6 +24,22 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+pubg = PUBG::Client.new(api_key: "")
+
+
+* pubg.players("name,name")
+* pubg.players("id,id")
+
+pubg.player("name")
+* pubg.player("id")
+
+pubg.match("match_id")
+
+pubg.telemetry("telemetry_url_.json")
+
+* pubg.status
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

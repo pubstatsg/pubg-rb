@@ -14,7 +14,11 @@ module PUBG
     end
 
     def players(shard=@shard, items)
-      params = "?filter[playerNames]=#{items}"
+      if items.include?("account.")
+        params = "?filter[playerIds]=#{items}"
+      else
+        params = "?filter[playerNames]=#{items}"
+      end
       path = "/shards/#{shard}/players#{params}"
       PUBG::Players.new(request(path))
     end
