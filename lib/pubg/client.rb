@@ -3,28 +3,29 @@ module PUBG
   require "oj"
 
   class Client
-  	def initialize(api_key=nil)
-      @api_key = api_key[:api_key] || ENV["PUBG_API_KEY"]
-      @shard = ENV["PUBG_SHARD"] || "xbox-na"
+  	def initialize(api_key=nil, platform_region="xbox-na")
+      # TODO: raise error if api_key nil
+      @api_key = api_key || ENV["PUBG_API_KEY"]
+      @platform_region = platform_region || ENV["PUBG_PLATFORM_REGION"]
     end
 
-    def player(shard=@shard, player_id)
-      path = "/shards/#{shard}/players/#{player_id}"
+    def player(platform_region=@platform_region, player_id)
+      path = "/shards/#{platform_region}/players/#{player_id}"
       PUBG::Player.new(request(path))
     end
 
-    def players(shard=@shard, items)
+    def players(platform_region=@platform_region, items)
       if items.include?("account.")
         params = "?filter[playerIds]=#{items}"
       else
         params = "?filter[playerNames]=#{items}"
       end
-      path = "/shards/#{shard}/players#{params}"
+      path = "/shards/#{platform_region}/players#{params}"
       PUBG::Players.new(request(path))
     end
 
-    def match(shard=@shard, match_id)
-      path = "/shards/#{shard}/matches/#{match_id}"
+    def match(platform_region=@platform_region, match_id)
+      path = "/shards/#{platform_region}/matches/#{match_id}"
       PUBG::Match.new(request(path))
     end
 
@@ -32,8 +33,8 @@ module PUBG
       PUBG::Telemetry.new(telemetry_request(url))
     end
 
-    def seasons(shard=@shard)
-      path = "/shards/#{shard}/seasons"
+    def seasons(platform_region=@platform_region)
+      path = "/shards/#{platform_region}/seasons"
       PUBG::Seasons.new(request(path))
     end
 
