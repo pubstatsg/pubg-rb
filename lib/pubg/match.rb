@@ -1,25 +1,20 @@
 module PUBG
 	class Match
-		require "pubg/match/attributes"
-		require "pubg/match/relationships"
 		require "pubg/match/participants"
-		require "pubg/match/roster"
 		require "pubg/match/telemetry"
+		require "pubg/match/roster"
 
-		attr_reader :type, :id, :attributes, :relationships, :link, :participants, :roster, :telemetry
+		attr_reader :data, :included, :links, :meta, :telemetry, :participants, :roster
 
 		def initialize(args)
-			@type = args["data"]["type"]
-			@id = args["data"]["id"]
-			@attributes = Attributes.new(args["data"]["attributes"])
-			@link = args["links"]["self"]
-			@participants = Array.new
-			@roster = Array.new
-			@relationships = Relationships.new(args["data"]["relationships"])
+			@data = args["data"]
 			@included = args["included"]
+			@links = args["links"]
+			@meta = args["meta"]
+			@participants = []
+			@roster = []
+			@telemetry = Telemetry.new(@included.select {|data| data["type"] == "asset" }.first)
 			included_apart
-			# right now we only get one asset so get the first
-			@telemetry = Telemetry.new(@included.select {|data| data["type"] == "asset" }.first)		
 		end
 
 		def included_apart
