@@ -2,8 +2,9 @@ module PUBG
 	class Player
 		require "pubg/player/matches"
 		require "pubg/player/player"
+		require "pubg/player/season"
 
-		attr_reader :data, :links, :meta, :player, :matches
+		attr_reader :data, :links, :meta, :player, :matches, :season
 
 		def initialize(args)
 			if args["data"]
@@ -15,6 +16,8 @@ module PUBG
 			@meta = args["meta"]
 			@player = Player.new(@data["attributes"])
 			@matches = get_matches
+			@player_id = @data["id"]
+			@season = nil
 		end
 
 		def get_matches
@@ -23,6 +26,10 @@ module PUBG
 	      matches << Matches.new(match)
 	    end
 	    return matches
+		end
+
+		def season(platform_region=$platform_region, season_id=nil)
+			Season.new(platform_region, @player_id, season_id)
 		end
 	end
 end

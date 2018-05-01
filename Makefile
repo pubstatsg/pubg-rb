@@ -2,11 +2,14 @@ build:
 	rm -rf *.gem
 	gem build *.gemspec
 
-install:
+install: build
 	gem install ./*.gem
 
-irb:
+console:
 	./bin/console
+
+setup:
+	./bin/setup
 
 test:
 	rake spec
