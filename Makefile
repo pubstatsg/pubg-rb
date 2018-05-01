@@ -13,3 +13,6 @@ setup:
 
 test:
 	rake spec
+
+release:
+	bundle exec rake release

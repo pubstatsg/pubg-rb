@@ -1,8 +1,8 @@
-# Pubg-rb
+# pubg-rb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pubg`. To experiment with that code, run `bin/console` for an interactive prompt.
+Wraps the PUBG REST API for convenient access from ruby applications.
 
-TODO: Delete this and the text above, and describe your gem
+Documentation for the PUBG REST API can be found here: [https://documentation.playbattlegrounds.com/en/introduction.html](https://documentation.playbattlegrounds.com/en/introduction.html)
 
 ## Installation
 To install using [Bundler](https://bundler.io/) grab the latest stable version:
@@ -29,10 +29,6 @@ git@github.com:pubstatsg/pubg-rb.git
 cd pubg-rb
 make install
 ```
-
-## Battlegrounds API Documenation
-[API Documentation Here](https://documentation.playbattlegrounds.com/en/introduction.html) 
-
 ## Getting Started
 ### Setup Work
 ```
@@ -119,7 +115,7 @@ seasons = @pubg.seasons
 
 After checking out the repo, run `make setup` to install dependencies. Then, run `make test` to run the tests. You can also run `make console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `make install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `make install`. To release a new version, update the version number in `version.rb`, and then run `make release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
