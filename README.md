@@ -33,7 +33,7 @@ pubg = PUBG::Client.new(api_key: "")
 pubg.player("name")
 * pubg.player("id")
 
-pubg.match("match_id")
+* pubg.match("match_id")
 
 pubg.telemetry("telemetry_url_.json")
 
