@@ -1,14 +1,15 @@
 module PUBG
   class Telemetry
-    require "pubg/telemetry/logplayerlogin"
-    require "pubg/telemetry/logplayercreate"
-    require "pubg/telemetry/logplayerposition"
-    require "pubg/telemetry/logplayerattack"
-    require "pubg/telemetry/logitempickup"
-    require "pubg/telemetry/logitemequip"
+    require "pubg/telemetry/log_player_login"
+    require "pubg/telemetry/log_player_create"
+    require "pubg/telemetry/log_player_position"
+    require "pubg/telemetry/log_player_attack"
+    require "pubg/telemetry/log_item_equip"
+    require "pubg/telemetry/log_item_pickup"
+    require "pubg/telemetry/log_item_unequip"
 
     attr_reader :data, :playerlogin, :playercreate, :playerposition, :playerattack, :itempickup,
-                :itemequip
+                :itemequip, :itemunequip
 
     def initialize(args)
       @data = args
@@ -19,6 +20,7 @@ module PUBG
       @playerattack = []
       @itempickup = []
       @itemequip = []
+      @itemunequip = []
 
       process_events
     end
@@ -39,9 +41,9 @@ module PUBG
         when "LogItemEquip"
           @itemequip << LogItemEquip.new(event)
         when "LogItemUnequip"
-
+          @itemunequip << LogItemUnequip.new(event)
         when "LogVehicleRide"
-
+          # << LogVehicleRide.new(event)
         when "LogMatchDefinition"
 
         when "LogMatchStart"
