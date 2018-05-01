@@ -69,30 +69,34 @@ Set up a client to talk to the PUBG API
 Get a collection of players by name's
 
 ```
-@pubg.players("acidtib,ImAverageSniper")
+players = @pubg.players("acidtib,ImAverageSniper")
 ```
 
 Get a collection of players by player_id's
 
 ```
-@pubg.players("account.c975e15685614c5f9da44f25598f7670,account.c6d7393a0fed4613973e3d89582f23fc")
+players = @pubg.players("account.c975e15685614c5f9da44f25598f7670,account.c6d7393a0fed4613973e3d89582f23fc")
 ```
 
 ##### /players/{player_id}
 Get a single player by the `player_id`
 
 ```
-@pubg.player("account.c975e15685614c5f9da44f25598f7670")
+player = @pubg.player("account.c975e15685614c5f9da44f25598f7670")
 ```
 
 ##### /players/{player_id}/seasons/{season_id}
 Get season information for a single player
 
+```
+season = player.season("xbox-na", "division.bro.official.xb-pre1")
+```
+
 ### -MATCHES
 #### /matches/{match_id}
 
 ```
-@pubg.match("895e77a8-0efa-492b-b256-3e9bf79097e6")
+match = @pubg.match("895e77a8-0efa-492b-b256-3e9bf79097e6")
 ```
 
 ### -STATUS
@@ -100,7 +104,7 @@ Get season information for a single player
 Check the status of the API
 
 ```
-@pubg.status
+status = @pubg.status
 ```
 
 ### -SEASONS
@@ -108,7 +112,7 @@ Check the status of the API
 Get a list of available seasons.
 
 ```
-@pubg.seasons
+seasons = @pubg.seasons
 ```
 
 ## Development

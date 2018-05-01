@@ -5,16 +5,16 @@ module PUBG
   class Client
   	def initialize(api_key=nil, platform_region="xbox-na")
       # TODO: raise error if api_key nil
-      @api_key = api_key || ENV["PUBG_API_KEY"]
-      @platform_region = platform_region || ENV["PUBG_PLATFORM_REGION"]
+      $api_key = api_key || ENV["PUBG_API_KEY"]
+      $platform_region = platform_region || ENV["PUBG_PLATFORM_REGION"]
     end
 
-    def player(platform_region=@platform_region, player_id)
+    def player(platform_region=$platform_region, player_id)
       path = "/shards/#{platform_region}/players/#{player_id}"
-      PUBG::Player.new(request(path))
+      PUBG::Player.new(Client.request(path))
     end
 
-    def players(platform_region=@platform_region, items)
+    def players(platform_region=$platform_region, items)
       if items.include?("account.")
         params = "?filter[playerIds]=#{items}"
       else
@@ -24,7 +24,7 @@ module PUBG
       PUBG::Players.new(request(path))
     end
 
-    def match(platform_region=@platform_region, match_id)
+    def match(platform_region=$platform_region, match_id)
       path = "/shards/#{platform_region}/matches/#{match_id}"
       PUBG::Match.new(request(path))
     end
@@ -33,22 +33,22 @@ module PUBG
       PUBG::Telemetry.new(telemetry_request(url))
     end
 
-    def seasons(platform_region=@platform_region)
+    def seasons(platform_region=$platform_region)
       path = "/shards/#{platform_region}/seasons"
       PUBG::Seasons.new(request(path))
     end
 
     def status
       path = "/status"
-      PUBG::Status.new(request(path))
+      PUBG::Status.new(Client.request(path))
     end
   	
-  	def request(path)
+  	def self.request(path)
   		request = Typhoeus.get(
 			  [$base_url, path].join(""),
 			  headers: { 
           Accept: "application/vnd.api+json",
-          Authorization: "Bearer #{@api_key}" 
+          Authorization: "Bearer #{$api_key}" 
         }
 			)
 
