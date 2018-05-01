@@ -30,6 +30,10 @@ module PUBG
       PUBG::Match.new(request(path))
     end
 
+    def telemetry(url)
+      PUBG::Telemetry.new(telemetry_request(url))
+    end
+
     def status
       path = "/status"
       PUBG::Status.new(request(path))
@@ -47,7 +51,6 @@ module PUBG
       response = Oj.load(request.body)
 
       case request.code
-      when 200
       when 404
         raise PUBError.new(response["errors"][0]["title"])
       when 429
@@ -56,5 +59,25 @@ module PUBG
       
       return response
   	end
+
+    def telemetry_request(url)
+      request = Typhoeus.get(
+        url,
+        headers: { 
+          Accept: "application/vnd.api+json"
+        }
+      )
+
+      response = Oj.load(request.body)
+
+      case request.code
+      when 404, 403
+        raise PUBError.new("Cant find telemetry file")
+      when 500
+        raise PUBError.new("Server error")
+      end
+
+      return response
+    end
   end
 end
