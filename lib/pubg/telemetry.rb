@@ -5,6 +5,7 @@ module PUBG
     require "pubg/telemetry/logplayerposition"
     require "pubg/telemetry/logplayerattack"
     require "pubg/telemetry/logitempickup"
+    require "pubg/telemetry/logitemequip"
 
     attr_reader :data, :playerlogin, :playercreate, :playerposition, :playerattack, :itempickup,
                 :itemequip
@@ -19,10 +20,10 @@ module PUBG
       @itempickup = []
       @itemequip = []
 
-      process_telemetry
+      process_events
     end
 
-    def process_telemetry
+    def process_events
       @data.each do |event|
         case event["_T"]
         when "LogPlayerLogin"

@@ -1,13 +1,12 @@
 module PUBG
   class Telemetry
-    class LogItemPickup
-      # require "pubg/telemetry/shared/character"
-      # require "pubg/telemetry/shared/item"
-      require "pry"
-      # attr_reader :data, :character, :item, :_V, :_D, :_T
+    class LogItemEquip
+      require "pubg/telemetry/shared/character"
+      require "pubg/telemetry/shared/item"
+      
+      attr_reader :data, :character, :item, :_V, :_D, :_T
 
       def initialize(args)
-        binding.pry
         @data = args
         @character = Character.new(args["Character"])
         @item = Item.new(args["Item"])
