@@ -11,8 +11,14 @@ RSpec.describe PUBG::Status do
       expect(status.attributes).not_to be nil
     end
   end
+  
+  describe "can read" do
+    it "version" do
+      expect(status.attributes.version).to eq("v9.4.1")
+    end
 
-  it "has version" do
-    expect(status.attributes.version).to eq("v9.4.1")
+    it "releasedAt" do
+      expect(status.attributes.releasedAt).to eq("2018-04-30T18:34:38Z")
+    end
   end
 end
