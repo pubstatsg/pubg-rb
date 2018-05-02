@@ -1,4 +1,4 @@
-# pubg-rb
+# pubg-rb [![Gem Version](https://img.shields.io/gem/v/pubg-rb.svg)](https://rubygems.org/gems/pubg-rb)
 
 Wraps the PUBG REST API for convenient access from ruby applications.
 
@@ -43,6 +43,7 @@ platform_region = "xbox-na"
 ```
 
 ### Make a Call
+an example for getting the seasons
 
 ```
 @pubg.seasons
@@ -53,7 +54,7 @@ platform_region = "xbox-na"
 ## Usage
 
 ### -CLIENT
-Set up a client to talk to the PUBG API
+Set up a client to talk to the PUBG API.
 
 ```
 @pubg = PUBG::Client.new("api_key", "platform_region")
@@ -62,30 +63,50 @@ Set up a client to talk to the PUBG API
 
 ### -PLAYERS
 ##### /players
-Get a collection of players by name's
+Get a collection of players by name's.
 
 ```
 players = @pubg.players("acidtib,ImAverageSniper")
+
+players.data
+players.links
+players.meta
 ```
 
-Get a collection of players by player_id's
+Get a collection of players by player_id's.
 
 ```
 players = @pubg.players("account.c975e15685614c5f9da44f25598f7670,account.c6d7393a0fed4613973e3d89582f23fc")
+
+players.data
+players.links
+players.meta
 ```
 
 ##### /players/{player_id}
-Get a single player by the `player_id`
+Get a single player by the `player_id`.
 
 ```
 player = @pubg.player("account.c975e15685614c5f9da44f25598f7670")
+
+player.data
+player.links
+player.meta
+player.player
+player.playerId
+player.matches
+player.season("division.bro.official.xb-pre1")
 ```
 
 ##### /players/{player_id}/seasons/{season_id}
-Get season information for a single player
+Get season information for a single player.
 
 ```
 season = player.season("xbox-na", "division.bro.official.xb-pre1")
+
+season.data
+season.links
+season.meta
 ```
 
 ### -MATCHES
@@ -93,14 +114,25 @@ season = player.season("xbox-na", "division.bro.official.xb-pre1")
 
 ```
 match = @pubg.match("895e77a8-0efa-492b-b256-3e9bf79097e6")
+
+match.data
+match.included
+match.links
+match.meta
+match.telemetry
+match.participants
+match.roster
 ```
 
 ### -STATUS
 ##### /status
-Check the status of the API
+Check the status of the API.
 
 ```
 status = @pubg.status
+
+status.data
+status.attributes
 ```
 
 ### -SEASONS
@@ -109,6 +141,27 @@ Get a list of available seasons.
 
 ```
 seasons = @pubg.seasons
+
+seasons.data
+seasons.links
+seasons.meta
+```
+
+### -TELEMETRY
+Telemetry provides further insight into a match.
+
+```
+telemetry = @pubg.telemetry("https://telemetry-cdn...c30c-telemetry.json")
+
+telemetry.data
+telemetry.playerLogin
+telemetry.playerCreate
+telemetry.playerPosition
+telemetry.playerAttack
+telemetry.itemPickup
+telemetry.itemEquip
+telemetry.itemUnequip
+telemetry.vehicleRide
 ```
 
 ## Development

@@ -1,26 +1,29 @@
 module PUBG
   class Player
     class Season
-      attr_reader :data, :links, :meta
-
       def initialize(platform_region=$platform_region, player_id, season_id)
         @platform_region = platform_region
         @player_id = player_id
         @season_id = season_id
 
-        @data = nil
-        @links = nil
-        @meta = nil
+        @args = get_season
+      end
 
-        get_season
+      def data
+        @args["data"]
+      end
+
+      def links
+        @args["links"]
+      end
+
+      def meta
+        @args["meta"]
       end
 
       def get_season
         path = "/shards/#{@platform_region}/players/#{@player_id}/seasons/#{@season_id}"
-        season = Client.request(path)
-        @data = season["data"]
-        @links = season["links"]
-        @meta = season["meta"]
+        Client.request(path)
       end
     end
   end
