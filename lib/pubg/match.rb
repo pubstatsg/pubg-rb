@@ -4,29 +4,46 @@ module PUBG
 		require "pubg/match/telemetry"
 		require "pubg/match/roster"
 
-		attr_reader :data, :included, :links, :meta, :telemetry, :participants, :roster
-
 		def initialize(args)
-			@data = args["data"]
-			@included = args["included"]
-			@links = args["links"]
-			@meta = args["meta"]
-			@participants = []
-			@roster = []
-			@telemetry = Telemetry.new(@included.select {|data| data["type"] == "asset" }.first)
-			included_apart
+			@args = args
 		end
 
-		def included_apart
-			participants = @included.select {|data| data["type"] == "participant" }
-			participants.each do |participant|
-				@participants << Participants.new(participant)
-			end
+		def data
+			@args["data"]
+		end
 
-			rosters = @included.select {|data| data["type"] == "roster" }
-			rosters.each do |roster|
-				@roster << Roster.new(roster)
+		def included
+			@args["included"]
+		end
+
+		def links
+			@args["links"]
+		end
+
+		def meta
+			@args["meta"]
+		end
+
+		def telemetry
+			Telemetry.new(@args["included"].select {|data| data["type"] == "asset" }.first)
+		end
+
+		def participants
+			items = []
+			participants = @args["included"].select {|data| data["type"] == "participant" }
+			participants.each do |participant|
+				items << Participants.new(participant)
 			end
+			return items
+		end
+
+		def roster
+			items = []
+			rosters = @args["included"].select {|data| data["type"] == "roster" }
+			rosters.each do |roster|
+				items << Roster.new(roster)
+			end
+			return items
 		end
 	end
 end

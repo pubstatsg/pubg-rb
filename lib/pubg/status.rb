@@ -2,11 +2,16 @@ module PUBG
 	class Status
 		require "pubg/status/attributes"
 
-		attr_reader :data, :attributes
-
 		def initialize(args)
-			@data = args["data"]
-			@attributes = Attributes.new(@data["attributes"])
+      @args = args
 		end
+
+    def data
+      @args["data"]
+    end
+
+    def attributes
+      Attributes.new(@args["data"]["attributes"])
+    end
 	end
 end

@@ -4,25 +4,37 @@ module PUBG
 		require "pubg/player/player"
 		require "pubg/player/season"
 
-		attr_reader :data, :links, :meta, :player, :matches, :season
-
 		def initialize(args)
 			if args["data"]
 				args = args["data"]
 			end
 			
-			@data = args
-			@links = args["links"]
-			@meta = args["meta"]
-			@player = Player.new(@data["attributes"])
-			@matches = get_matches
-			@player_id = @data["id"]
-			@season = nil
+			@args = args
 		end
 
-		def get_matches
+		def data
+			@args
+		end
+
+		def links
+			@args["links"]
+		end
+
+		def meta
+			@args["meta"]
+		end
+
+		def player
+			Player.new(@args["attributes"])
+		end
+
+		def playerId
+			@args["id"]
+		end
+
+		def matches
 			matches = []
-			@data["relationships"]["matches"]["data"].each do |match|
+			@args["relationships"]["matches"]["data"].each do |match|
 	      matches << Matches.new(match)
 	    end
 	    return matches

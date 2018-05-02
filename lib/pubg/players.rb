@@ -1,11 +1,20 @@
 module PUBG
   class Players
-    attr_reader :data, :links, :meta
 
     def initialize(args)
-      @data = args["data"]
-      @links = args["links"]
-      @meta = args["meta"]
+      @args = args
+    end
+
+    def data
+      @args["data"]
+    end
+
+    def links
+      @args["links"]
+    end
+
+    def meta
+      @args["meta"]
     end
   end
 end

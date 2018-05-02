@@ -21,12 +21,12 @@ module PUBG
         params = "?filter[playerNames]=#{items}"
       end
       path = "/shards/#{platform_region}/players#{params}"
-      PUBG::Players.new(request(path))
+      PUBG::Players.new(Client.request(path))
     end
 
     def match(platform_region=$platform_region, match_id)
       path = "/shards/#{platform_region}/matches/#{match_id}"
-      PUBG::Match.new(request(path))
+      PUBG::Match.new(Client.request(path))
     end
 
     def telemetry(url)
@@ -35,7 +35,7 @@ module PUBG
 
     def seasons(platform_region=$platform_region)
       path = "/shards/#{platform_region}/seasons"
-      PUBG::Seasons.new(request(path))
+      PUBG::Seasons.new(Client.request(path))
     end
 
     def status

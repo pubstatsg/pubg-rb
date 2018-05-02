@@ -7,75 +7,107 @@ module PUBG
     require "pubg/telemetry/log_item_equip"
     require "pubg/telemetry/log_item_pickup"
     require "pubg/telemetry/log_item_unequip"
-
-    attr_reader :data, :playerlogin, :playercreate, :playerposition, :playerattack, :itempickup,
-                :itemequip, :itemunequip
+    require "pubg/telemetry/log_vehicle_ride"
 
     def initialize(args)
-      @data = args
-
-      @playerlogin = []
-      @playercreate = []
-      @playerposition = []
-      @playerattack = []
-      @itempickup = []
-      @itemequip = []
-      @itemunequip = []
-
-      process_events
+      @args = args
     end
 
-    def process_events
-      @data.each do |event|
-        case event["_T"]
-        when "LogPlayerLogin"
-          @playerlogin << LogPlayerLogin.new(event)
-        when "LogPlayerCreate"
-          @playercreate << LogPlayerCreate.new(event)
-        when "LogPlayerPosition"
-          @playerposition << LogPlayerPosition.new(event)
-        when "LogPlayerAttack"
-          @playerattack << LogPlayerAttack.new(event)
-        when "LogItemPickup"
-          @itempickup << LogItemPickup.new(event)
-        when "LogItemEquip"
-          @itemequip << LogItemEquip.new(event)
-        when "LogItemUnequip"
-          @itemunequip << LogItemUnequip.new(event)
-        when "LogVehicleRide"
-          # << LogVehicleRide.new(event)
-        when "LogMatchDefinition"
+    def data
+      @args
+    end
 
-        when "LogMatchStart"
+    def playerLogin
+      @args.select {|data| data["_T"] == "LogPlayerLogin" }
+    end
 
-        when "LogGameStatePeriodic"
+    def playerCreate
+      @args.select {|data| data["_T"] == "LogPlayerCreate" }
+    end
 
-        when "LogVehicleLeave"
+    def playerPosition
+      @args.select {|data| data["_T"] == "LogPlayerPosition" }
+    end
 
-        when "LogPlayerTakeDamage"
+    def playerAttack
+      @args.select {|data| data["_T"] == "LogPlayerAttack" }
+    end
 
-        when "LogPlayerLogout"
+    def itemPickup
+      @args.select {|data| data["_T"] == "LogItemPickup" }
+    end
 
-        when "LogItemAttach"
+    def itemEquip
+      @args.select {|data| data["_T"] == "LogItemEquip" }
+    end
 
-        when "LogItemDrop"
+    def itemUnequip
+      @args.select {|data| data["_T"] == "LogItemUnequip" }
+    end
 
-        when "LogPlayerKill"
+    def vehicleRide
+      @args.select {|data| data["_T"] == "LogVehicleRide" }
+    end
 
-        when "LogItemDetach"
+    def LogMatchDefinition
 
-        when "LogItemUse"
+    end
 
-        when "LogCarePackageSpawn"
+    def LogMatchStart
 
-        when "LogVehicleDestroy"
+    end
 
-        when "LogCarePackageLand"
+    def LogGameStatePeriodic
+
+    end
+
+    def LogVehicleLeave
+
+    end
+
+    def LogPlayerTakeDamage
+
+    end
+
+    def LogPlayerLogout
+
+    end
+
+    def LogItemAttach
+
+    end
+
+    def LogItemDrop
+
+    end
+
+    def LogPlayerKill
+
+    end
+
+    def LogItemDetach
+
+    end
+
+    def LogItemUse
+
+    end
+
+    def LogCarePackageSpawn
+
+    end
+
+    def LogVehicleDestroy
+
+    end
+
+    def LogCarePackageLand
+
+    end
         
-        when "LogMatchEnd"
+    def LogMatchEnd
 
-        end
-      end
     end
+
   end
 end
