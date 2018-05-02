@@ -1,6 +1,10 @@
 require "bundler/setup"
+require "webmock/rspec"
+require "support/fake_pubg"
 require "pry"
 require "pubg-rb"
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -11,5 +15,11 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before(:each) do
+    stub_request(:any, /api.playbattlegrounds.com/).to_rack(FakePubg)
+
+    @pubg = PUBG::Client.new("ultra_key", "xbox-na")
   end
 end

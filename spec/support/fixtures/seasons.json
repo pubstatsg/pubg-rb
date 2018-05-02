@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "type": "season",
+      "id": "division.bro.official.xb-pre1",
+      "attributes": {
+        "isCurrentSeason": true,
+        "isOffseason": false
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api.playbattlegrounds.com/shards/xbox-na/seasons"
+  },
+  "meta": {}
+}
