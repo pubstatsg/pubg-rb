@@ -1,6 +1,6 @@
 module PUBG
 	class Status
-    require "pubg/status/data"		
+    require "pubg/status/data"
 
 		def initialize(args)
       @args = args
