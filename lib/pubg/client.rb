@@ -9,6 +9,14 @@ module PUBG
       $platform_region = platform_region || ENV["PUBG_PLATFORM_REGION"]
     end
 
+    def api_key
+      $api_key
+    end
+
+    def platform_region
+      $platform_region
+    end
+
     def player(platform_region=$platform_region, player_id)
       path = "/shards/#{platform_region}/players/#{player_id}"
       PUBG::Player.new(Client.request(path))
