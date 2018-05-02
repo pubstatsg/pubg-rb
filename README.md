@@ -1,4 +1,4 @@
-# pubg-rb [![Gem Version](https://img.shields.io/gem/v/pubg-rb.svg)](https://rubygems.org/gems/pubg-rb)
+# pubg-rb  [![Build Status](https://travis-ci.com/pubstatsg/pubg-rb.svg?branch=master)](https://travis-ci.com/pubstatsg/pubg-rb) [![Gem Version](https://img.shields.io/gem/v/pubg-rb.svg)](https://rubygems.org/gems/pubg-rb)
 
 Wraps the PUBG REST API for convenient access from ruby applications.
 
