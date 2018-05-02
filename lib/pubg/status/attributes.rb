@@ -1,12 +1,17 @@
 module PUBG
 	class Status
 		class Attributes
-			attr_reader :version, :releasedAt
-
 			def initialize(args)
-				@version = args["version"]
-				@releasedAt = args["releasedAt"]
+				@args = args
 			end
+
+      def version
+        @args["version"]
+      end
+
+      def releasedAt
+        @args["releasedAt"]
+      end
 		end
 	end
 end

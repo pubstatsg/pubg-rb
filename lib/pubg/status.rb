@@ -1,17 +1,17 @@
 module PUBG
 	class Status
-		require "pubg/status/attributes"
+    require "pubg/status/data"		
 
 		def initialize(args)
       @args = args
 		end
 
-    def data
-      @args["data"]
+    def original
+      @args
     end
 
-    def attributes
-      Attributes.new(@args["data"]["attributes"])
+    def data
+      Data.new(@args["data"])
     end
 	end
 end
