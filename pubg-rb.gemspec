@@ -26,6 +26,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~> 0.11.3"
   spec.add_development_dependency "pry-byebug", "~> 3.6.0"
+  spec.add_development_dependency "webmock", "~> 3.4.1"
+  spec.add_development_dependency "sinatra", "~> 2.0.1"
 
   spec.add_dependency "typhoeus", "~> 1.3.0"
   spec.add_dependency "oj", "~> 3.5.1"
