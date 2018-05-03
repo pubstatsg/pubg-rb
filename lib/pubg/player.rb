@@ -1,5 +1,7 @@
 module PUBG
 	class Player
+		require "pubg/player/links"
+		require "pubg/player/data"
 		# require "pubg/player/matches"
 		# require "pubg/player/player"
 		# require "pubg/player/season"
@@ -13,11 +15,11 @@ module PUBG
 		end
 
 		def data
-			@args["data"]
+			Data.new(@args["data"])
 		end
 
 		def links
-			@args["links"]
+			Links.new(@args["links"])
 		end
 
 		def meta
