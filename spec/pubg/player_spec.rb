@@ -23,13 +23,23 @@ RSpec.describe PUBG::Player do
       expect(player.player).not_to be nil
     end
 
-    # it "playerId" do
-    #   expect(player.playerId).not_to be nil
-    # end
+    it "playerId" do
+      expect(player.playerId).not_to be nil
+    end
 
-    # it "matches" do
-    #   expect(player.matches).not_to be nil
-    # end
+    it "matches" do
+      expect(player.matches).not_to be nil
+    end
+
+    describe "season" do
+      it "season" do
+        expect(player.season("division.bro.official.xb-pre1")).not_to be nil
+      end
+
+      it "original" do
+        expect(player.season("division.bro.official.xb-pre1").original).not_to be nil
+      end      
+    end
 
     describe "can read data" do
       describe "data" do
@@ -157,9 +167,193 @@ RSpec.describe PUBG::Player do
         end
       end
 
-      # describe "season" do
-      #   let(:season) { player.season("division.bro.official.xb-pre1") }
-      # end
+      describe "season" do
+        let(:season) { player.season("division.bro.official.xb-pre1") }
+
+        describe "data" do
+          it "type" do
+            expect(season.data.type).to eq("playerSeason")
+          end
+
+          describe "attributes" do
+            it "GameModeStats" do
+              expect(season.data.attributes.gameModeStats).not_to be nil
+            end
+
+            describe "GameModeStats" do
+              let(:gameModeStats) { season.data.attributes.gameModeStats }
+
+              describe "solo" do
+                let(:solo) { gameModeStats.solo }
+                
+                it "assists" do
+                  expect(solo.assists).to eq(0)
+                end
+
+                it "boosts" do
+                  expect(solo.boosts).to eq(6)
+                end
+
+                it "dBNOs" do
+                  expect(solo.dBNOs).to eq(0)
+                end
+
+                it "dailyKills" do
+                  expect(solo.dailyKills).to eq(6)
+                end
+
+                it "damageDealt" do
+                  expect(solo.damageDealt).to eq(745.1687)
+                end
+
+                it "days" do
+                  expect(solo.days).to eq(2)
+                end
+
+                it "headshotKills" do
+                  expect(solo.headshotKills).to eq(1)
+                end
+
+                it "heals" do
+                  expect(solo.heals).to eq(19)
+                end
+
+                it "killPoints" do
+                  expect(solo.killPoints).to eq(1051.7622)
+                end
+
+                it "kills" do
+                  expect(solo.kills).to eq(6)
+                end
+
+                it "longestKill" do
+                  expect(solo.longestKill).to eq(51.437023)
+                end
+
+                it "longestTimeSurvived" do
+                  expect(solo.longestTimeSurvived).to eq(1646.221)
+                end
+
+                it "losses" do
+                  expect(solo.losses).to eq(11)
+                end
+
+                it "maxKillStreaks" do
+                  expect(solo.maxKillStreaks).to eq(1)
+                end
+
+                it "mostSurvivalTime" do
+                  expect(solo.mostSurvivalTime).to eq(1646.221)
+                end
+
+                it "revives" do
+                  expect(solo.revives).to eq(0)
+                end
+
+                it "rideDistance" do
+                  expect(solo.rideDistance).to eq(1158.1501)
+                end
+
+                it "roadKills" do
+                  expect(solo.roadKills).to eq(0)
+                end
+
+                it "roundMostKills" do
+                  expect(solo.roundMostKills).to eq(1)
+                end
+
+                it "roundsPlayed" do
+                  expect(solo.roundsPlayed).to eq(11)
+                end
+
+                it "suicides" do
+                  expect(solo.suicides).to eq(1)
+                end
+
+                it "teamKills" do
+                  expect(solo.teamKills).to eq(1)
+                end
+
+                it "timeSurvived" do
+                  expect(solo.timeSurvived).to eq(9972.443)
+                end
+
+                it "top10s" do
+                  expect(solo.top10s).to eq(1)
+                end
+
+                it "vehicleDestroys" do
+                  expect(solo.vehicleDestroys).to eq(0)
+                end
+
+                it "walkDistance" do
+                  expect(solo.walkDistance).to eq(16153.033)
+                end
+
+                it "weaponsAcquired" do
+                  expect(solo.weaponsAcquired).to eq(53)
+                end
+
+                it "weeklyKills" do
+                  expect(solo.weeklyKills).to eq(6)
+                end
+
+                it "winPoints" do
+                  expect(solo.winPoints).to eq(1079.8701)
+                end
+
+                it "wins" do
+                  expect(solo.wins).to eq(0)
+                end
+              end
+
+              describe "duo" do
+                let(:duo) { gameModeStats.duo }
+                
+                it "assists" do
+                  expect(duo.assists).to eq(5)
+                end
+              end
+
+              describe "squad" do
+                let(:squad) { gameModeStats.squad }
+                
+                it "assists" do
+                  expect(squad.assists).to eq(1)
+                end
+              end
+
+              describe "solo_fpp" do
+                let(:solo_fpp) { gameModeStats.solo_fpp }
+                
+                it "assists" do
+                  expect(solo_fpp.assists).to eq(0)
+                end
+              end
+
+              describe "duo_fpp" do
+                let(:duo_fpp) { gameModeStats.duo_fpp }
+                
+                it "assists" do
+                  expect(duo_fpp.assists).to eq(0)
+                end
+              end
+
+              describe "squad_fpp" do
+                let(:squad_fpp) { gameModeStats.squad_fpp }
+                
+                it "assists" do
+                  expect(squad_fpp.assists).to eq(0)
+                end
+              end
+            end
+          end
+        end
+
+        it "links" do
+          expect(season.links.self).to eq("https://api.playbattlegrounds.com/shards/xbox-na/players/account.09a092c13e294f8c9c544cc94bba3943/seasons/division.bro.official.xb-pre1")
+        end
+      end
     end
   end
 end

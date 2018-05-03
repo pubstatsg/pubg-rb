@@ -1,5 +1,9 @@
 require "sinatra/base"
 class FakePubg < Sinatra::Base
+  get "/shards/:shard/players/:account_id/seasons/:season_id" do
+    json_response 200, "player_season.json"
+  end
+
   get "/shards/:shard/players/:account_id" do
     json_response 200, "player.json"
   end

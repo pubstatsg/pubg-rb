@@ -1,6 +1,8 @@
 module PUBG
   class Player
     class Season
+      require "pubg/player/season/data"
+
       def initialize(platform_region=$platform_region, player_id, season_id)
         @platform_region = platform_region
         @player_id = player_id
@@ -9,12 +11,16 @@ module PUBG
         @args = get_season
       end
 
+      def original
+        @args
+      end
+
       def data
-        @args["data"]
+        Data.new(@args["data"])
       end
 
       def links
-        @args["links"]
+        Links.new(@args["links"])
       end
 
       def meta

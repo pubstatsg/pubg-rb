@@ -41,8 +41,8 @@ module PUBG
 	    return matches
 		end
 
-		# def season(platform_region=$platform_region, season_id=nil)
-		# 	Season.new(platform_region, @player_id, season_id)
-		# end
+		def season(season_id=nil, platform_region=$platform_region)
+			Season.new(platform_region, @args["data"]["id"], season_id)
+		end
 	end
 end
