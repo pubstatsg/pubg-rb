@@ -363,6 +363,30 @@ RSpec.describe PUBG::Player do
                 expect(season.data.relationships.player.id).to eq("account.09a092c13e294f8c9c544cc94bba3943")
               end
             end
+
+            describe "season" do
+              it "type" do
+                expect(season.data.relationships.season.type).to eq("season")
+              end
+
+              it "id" do
+                expect(season.data.relationships.season.id).to eq("division.bro.official.xb-pre1")
+              end
+            end
+
+            describe "matchesSquad" do
+              it "matchesSquad" do
+                expect(season.data.relationships.matchesSquad.count).to eq(5)
+              end
+
+              it "type" do
+                expect(season.data.relationships.matchesSquad.first.type).to eq("match")
+              end
+
+              it "id" do
+                expect(season.data.relationships.matchesSquad.first.id).to eq("48ba5839-0701-43e3-aa81-96febb6f6d45")
+              end
+            end
           end
         end
 

@@ -4,6 +4,8 @@ module PUBG
       class Data
         class Relationships
           require "pubg/player/season/data/relationships/player"
+          require "pubg/player/season/data/relationships/season"
+          require "pubg/player/season/data/relationships/matches"
 
           def initialize(args)
             @args = args
@@ -14,32 +16,40 @@ module PUBG
           end
 
           def season
-            @args["season"]
+            Season.new(@args["season"])
           end
 
           def matchesSolo
-            @args["matchesSolo"]
+            matchStyle(@args["matchesSolo"]["data"])
           end
 
           def matchesDuo
-            @args["matchesDuo"]
+            matchStyle(@args["matchesDuo"]["data"])
           end
 
           def matchesSquad
-            @args["matchesSquad"]
+            matchStyle(@args["matchesSquad"]["data"])
           end
 
           def matchesSoloFPP
-            @args["matchesSoloFPP"]
+            matchStyle(@args["matchesSoloFPP"]["data"])
           end
 
           def matchesDuoFPP
-            @args["matchesDuoFPP"]
+            matchStyle(@args["matchesDuoFPP"]["data"])
           end
           
           def matchesSquadFPP
-            @args["matchesSquadFPP"]
-          end          
+            matchStyle(@args["matchesSquadFPP"]["data"])
+          end
+
+          def matchStyle(data)
+            i = []
+            data.each do |item|
+              i << Matches.new(item)
+            end
+            i
+          end
         end
       end
     end
