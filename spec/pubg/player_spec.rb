@@ -348,6 +348,22 @@ RSpec.describe PUBG::Player do
               end
             end
           end
+
+          describe "relationships" do
+            it "player" do
+              expect(season.data.relationships.player).not_to be nil
+            end
+
+            describe "player" do
+              it "type" do
+                expect(season.data.relationships.player.type).to eq("player")
+              end
+
+              it "id" do
+                expect(season.data.relationships.player.id).to eq("account.09a092c13e294f8c9c544cc94bba3943")
+              end
+            end
+          end
         end
 
         it "links" do

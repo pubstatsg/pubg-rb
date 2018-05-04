@@ -3,6 +3,7 @@ module PUBG
     class Season
       class Data
         require "pubg/player/season/data/attributes"
+        require "pubg/player/season/data/relationships"
 
         def initialize(args)
           @args = args
@@ -17,7 +18,7 @@ module PUBG
         end
 
         def relationships
-          # Relationships.new(@args["relationships"])
+          Relationships.new(@args["relationships"])
         end
       end
     end
