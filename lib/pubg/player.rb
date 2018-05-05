@@ -5,7 +5,8 @@ module PUBG
 		require "pubg/player/matches"
 		require "pubg/player/season"
 
-		def initialize(args)
+		def initialize(args, s=false)
+			@s = s
 			@args = args
 		end
 
@@ -14,7 +15,15 @@ module PUBG
 		end
 
 		def data
-			Data.new(@args["data"])
+			if @s
+				data = []
+	      @args["data"].each do |player|
+	        data << Data.new(player)
+	      end
+	      return data
+			else
+				Data.new(@args["data"])
+			end
 		end
 
 		def links

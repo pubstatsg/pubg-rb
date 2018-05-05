@@ -8,6 +8,10 @@ class FakePubg < Sinatra::Base
     json_response 200, "player.json"
   end
 
+  get "/shards/:shard/players" do
+    json_response 200, "players.json"
+  end
+
   get "/shards/:shard/matches/:match_id" do
     json_response 200, "match.json"
   end

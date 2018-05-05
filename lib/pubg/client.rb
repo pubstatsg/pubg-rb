@@ -29,7 +29,7 @@ module PUBG
         params = "?filter[playerNames]=#{items}"
       end
       path = "/shards/#{platform_region}/players#{params}"
-      PUBG::Players.new(Client.request(path))
+      PUBG::Player.new(Client.request(path), true)
     end
 
     def match(platform_region=$platform_region, match_id)

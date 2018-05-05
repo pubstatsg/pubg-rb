@@ -109,6 +109,7 @@ Get season information for a single player.
 ```ruby
 season = player.season("xbox-na", "division.bro.official.xb-pre1")
 
+season.original
 season.data
 season.links
 season.meta
