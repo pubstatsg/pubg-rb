@@ -4,6 +4,8 @@ Wraps the PUBG REST API for convenient access from ruby applications.
 
 Documentation for the PUBG REST API can be found here: [https://documentation.playbattlegrounds.com/en/introduction.html](https://documentation.playbattlegrounds.com/en/introduction.html)
 
+Notice this wrapper is still in development. Im sure some things are broken when dealing with PC match data. Ive been testing using an xbox account.
+
 ## Installation
 To install using [Bundler](https://bundler.io/) grab the latest stable version:
 
@@ -31,7 +33,7 @@ make install
 ```
 ## Getting Started
 ### Setup Work
-```
+```ruby
 require "pubg-rb"
 
 # put your own credentials here
@@ -43,10 +45,10 @@ platform_region = "xbox-na"
 ```
 
 ### Make a Call
-an example for getting the seasons
+an example for getting the status
 
-```
-@pubg.seasons
+```ruby
+@pubg.status
 ```
 
 ---
@@ -56,18 +58,19 @@ an example for getting the seasons
 ### -CLIENT
 Set up a client to talk to the PUBG API.
 
-```
+```ruby
 @pubg = PUBG::Client.new("api_key", "platform_region")
 ```
-- note if platform_region is set on the client it does not need to be set elsewhere
+- note if `platform_region` is set on the client or environment variable`PUBG_PLATFORM_REGION` it does not need to be set elsewhere
 
 ### -PLAYERS
 ##### /players
 Get a collection of players by name's.
 
-```
-players = @pubg.players("acidtib,ImAverageSniper")
+```ruby
+players = @pubg.players("Optional_platform_region", "acidtib,ImAverageSniper")
 
+players.original
 players.data
 players.links
 players.meta
@@ -75,9 +78,10 @@ players.meta
 
 Get a collection of players by player_id's.
 
-```
-players = @pubg.players("account.c975e15685614c5f9da44f25598f7670,account.c6d7393a0fed4613973e3d89582f23fc")
+```ruby
+players = @pubg.players("Optional_platform_region", "account.c975e15685614c5f9da44f25598f7670,account.c6d7393a0fed4613973e3d89582f23fc")
 
+players.original
 players.data
 players.links
 players.meta
@@ -86,9 +90,10 @@ players.meta
 ##### /players/{player_id}
 Get a single player by the `player_id`.
 
-```
-player = @pubg.player("account.c975e15685614c5f9da44f25598f7670")
+```ruby
+player = @pubg.player("Optional_platform_region", "account.c975e15685614c5f9da44f25598f7670")
 
+player.original
 player.data
 player.links
 player.meta
@@ -101,7 +106,7 @@ player.season("division.bro.official.xb-pre1")
 ##### /players/{player_id}/seasons/{season_id}
 Get season information for a single player.
 
-```
+```ruby
 season = player.season("xbox-na", "division.bro.official.xb-pre1")
 
 season.data
@@ -112,7 +117,7 @@ season.meta
 ### -MATCHES
 #### /matches/{match_id}
 
-```
+```ruby
 match = @pubg.match("895e77a8-0efa-492b-b256-3e9bf79097e6")
 
 match.data
@@ -128,20 +133,21 @@ match.roster
 ##### /status
 Check the status of the API.
 
-```
+```ruby
 status = @pubg.status
 
+status.original
 status.data
-status.attributes
 ```
 
 ### -SEASONS
 ##### /seasons
 Get a list of available seasons.
 
-```
-seasons = @pubg.seasons
+```ruby
+seasons = @pubg.seasons("Optional_platform_region")
 
+seasons.original
 seasons.data
 seasons.links
 seasons.meta
@@ -150,10 +156,10 @@ seasons.meta
 ### -TELEMETRY
 Telemetry provides further insight into a match.
 
-```
+```ruby
 telemetry = @pubg.telemetry("https://telemetry-cdn...c30c-telemetry.json")
 
-telemetry.data
+telemetry.original
 telemetry.playerLogin
 telemetry.playerCreate
 telemetry.playerPosition

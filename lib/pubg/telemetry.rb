@@ -13,7 +13,7 @@ module PUBG
       @args = args
     end
 
-    def data
+    def original
       @args
     end
 
