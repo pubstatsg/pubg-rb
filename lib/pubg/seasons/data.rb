@@ -1,6 +1,8 @@
 module PUBG
   class Seasons
     class Data
+      require "pubg/seasons/data/attributes"
+
       def initialize(args)
         @args = args
       end
@@ -15,20 +17,6 @@ module PUBG
 
       def attributes
         Attributes.new(@args["attributes"])
-      end
-
-      class Attributes
-        def initialize(args)
-          @args = args
-        end
-
-        def isCurrentSeason
-          @args["isCurrentSeason"]
-        end
-
-        def isOffseason
-          @args["isOffseason"]
-        end
       end
     end
   end

@@ -8,6 +8,10 @@ module PUBG
 			@args = args
 		end
 
+		def original
+			@args
+		end
+
 		def data
 			@args["data"]
 		end

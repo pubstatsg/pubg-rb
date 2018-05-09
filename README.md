@@ -1,8 +1,10 @@
-# pubg-rb  [![Build Status](https://travis-ci.com/pubstatsg/pubg-rb.svg?branch=master)](https://travis-ci.com/pubstatsg/pubg-rb) [![Gem Version](https://img.shields.io/gem/v/pubg-rb.svg)](https://rubygems.org/gems/pubg-rb)
+# pubg-rb  [![Build Status](https://travis-ci.com/pubstatsg/pubg-rb.svg?branch=master)](https://travis-ci.com/pubstatsg/pubg-rb) [![Gem Version](https://img.shields.io/gem/v/pubg-rb.svg)](https://rubygems.org/gems/pubg-rb) [![Discord](https://img.shields.io/discord/442440713393930242.svg?logo=discord)](https://discord.gg/GZpFFN)
 
 Wraps the PUBG REST API for convenient access from ruby applications.
 
 Documentation for the PUBG REST API can be found here: [https://documentation.playbattlegrounds.com/en/introduction.html](https://documentation.playbattlegrounds.com/en/introduction.html)
+
+If you need help please jump into the Discord server [https://discord.gg/GZpFFN](https://discord.gg/GZpFFN)
 
 Notice this wrapper is still in development. Im sure some things are broken when dealing with PC match data. Ive been testing using an xbox account.
 
@@ -55,7 +57,7 @@ an example for getting the status
 
 ## Usage
 
-### -CLIENT
+### - CLIENT
 Set up a client to talk to the PUBG API.
 
 ```ruby
@@ -63,7 +65,7 @@ Set up a client to talk to the PUBG API.
 ```
 - note if `platform_region` is set on the client or environment variable`PUBG_PLATFORM_REGION` it does not need to be set elsewhere
 
-### -PLAYERS
+### - PLAYERS
 ##### /players
 Get a collection of players by name's.
 
@@ -115,12 +117,13 @@ season.links
 season.meta
 ```
 
-### -MATCHES
+### - MATCHES
 #### /matches/{match_id}
 
 ```ruby
 match = @pubg.match("895e77a8-0efa-492b-b256-3e9bf79097e6")
 
+match.original
 match.data
 match.included
 match.links
@@ -130,7 +133,7 @@ match.participants
 match.roster
 ```
 
-### -STATUS
+### - STATUS
 ##### /status
 Check the status of the API.
 
@@ -141,7 +144,7 @@ status.original
 status.data
 ```
 
-### -SEASONS
+### - SEASONS
 ##### /seasons
 Get a list of available seasons.
 
@@ -154,7 +157,7 @@ seasons.links
 seasons.meta
 ```
 
-### -TELEMETRY
+### - TELEMETRY
 Telemetry provides further insight into a match.
 
 ```ruby
